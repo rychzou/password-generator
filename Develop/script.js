@@ -5,7 +5,7 @@ const numericChar = "0123456789";
 const specialChar = "!@#$%&*()^)_+=-,./<>?{}[]"
 
 // Function for prompts
-function getPSasswordCriteria() {
+function getPasswordCriteria() {
   var length = prompt("Choose a password length (between 8 and 128 characters).")
   while (length < 8 || length > 128 || isNaN(length)) {
     length = prompt("Please choose a valid password length (between 8 and 128 characters).");
@@ -35,6 +35,34 @@ function getPSasswordCriteria() {
   return passwordCriteria;
 
 }
+
+//functions to generate password
+function generatePassword() {
+  var criteria = getPasswordCriteria();
+  var charSet = "";
+
+  if (criteria.includeLowerCase) {
+    charSet += lowerCaseChar;
+  }
+  if (criteria.includeUpperCase) {
+    charSet += upperCaseChar;
+  }
+  if (criteria.includeNumeric) {
+    charSet += numericChar;
+  }
+  if (criteria.includeSpecialChars) {
+    charSet += specialChar;
+  }
+
+  var password = "";
+  for (var i = 0; i < criteria.length; i++) {
+    password += charSet.charAt(Math.floor(Math.random() * charSet.length));
+  }
+
+  return password;
+
+}
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
